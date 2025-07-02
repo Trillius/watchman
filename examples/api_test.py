@@ -11,8 +11,13 @@ import os
 from typing import Dict, Any
 
 # Configuration
-API_BASE_URL = "http://localhost:8080"
-API_SECRET_KEY = os.getenv("API_SECRET_KEY", "your_api_key_here")
+try:
+    from config.settings import settings
+    API_BASE_URL = f"http://localhost:{settings.api_port}"
+    API_SECRET_KEY = settings.api_secret_key
+except ImportError:
+    API_BASE_URL = "http://localhost:8080"
+    API_SECRET_KEY = os.getenv("API_SECRET_KEY", "your_api_key_here")
 
 def make_api_request(endpoint: str, data: Dict[str, Any] = None) -> Dict[str, Any]:
     """Make an authenticated API request."""
