@@ -465,3 +465,12 @@ For issues and questions:
 - FastAPI external events
 - Slash commands support
 - Comprehensive logging and health checks
+
+## 📚 Documentation
+
+- [Setup Guide](docs/setup.md)
+- [Bot Usage](docs/usage.md)
+- [Deployment (GitHub Actions)](docs/deployment.md)
+- [Kubernetes Deployment](docs/KUBERNETES.md)
+- [Discord Bot Setup](docs/DISCORD_SETUP.md)
+- [Contributing Guide](docs/contributing.md)
