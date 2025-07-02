@@ -1,0 +1,16 @@
+discord.py==2.3.2
+aiohttp==3.9.1
+python-dotenv==1.0.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.2
+aiofiles==23.2.1
+python-dateutil==2.8.2
+feedparser==6.0.10
+requests==2.31.0
+schedule==1.2.0
+asyncio-mqtt==0.16.1
+sqlalchemy==2.0.23
+alembic==1.12.1
+psutil==5.9.6
+loguru==0.7.2

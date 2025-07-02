@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: watchman
+  namespace: watchman
+  labels:
+    app: watchman
+    component: bot
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app: watchman
+    component: bot
