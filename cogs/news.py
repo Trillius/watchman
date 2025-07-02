@@ -58,7 +58,7 @@ class NewsCog(commands.Cog):
         
         new_stories = []
         
-        for feed_url in settings.news_rss_feeds:
+        for feed_url in settings.get_news_feeds_list():
             try:
                 stories = await self.fetch_rss_feed(feed_url)
                 new_stories.extend(stories)
@@ -153,7 +153,7 @@ class NewsCog(commands.Cog):
         
         try:
             stories = []
-            for feed_url in settings.news_rss_feeds:
+            for feed_url in settings.get_news_feeds_list():
                 feed_stories = await self.fetch_rss_feed(feed_url)
                 stories.extend(feed_stories[:count])
             

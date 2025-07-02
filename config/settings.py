@@ -3,7 +3,8 @@
 import os
 from typing import List, Optional
 from pathlib import Path
-from pydantic import BaseSettings, validator
+from pydantic_settings import BaseSettings
+from pydantic import validator
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -13,19 +14,19 @@ class Settings(BaseSettings):
     """Bot configuration settings."""
     
     # Discord Configuration
-    discord_token: str
+    discord_token: str = "your_discord_bot_token_here"
     discord_guild_id: Optional[int] = None
     
     # API Configuration
     api_host: str = "0.0.0.0"
     api_port: int = 8080
-    api_secret_key: str
+    api_secret_key: str = "change_me"
     
     # Database Configuration
     database_url: str = "sqlite:///./bot_data.db"
     
     # News Configuration
-    news_rss_feeds: List[str] = ["https://hnrss.org/frontpage"]
+    news_rss_feeds: str = "https://hnrss.org/frontpage"
     news_check_interval: int = 3600  # seconds
     news_channel_id: Optional[int] = None
     
@@ -37,16 +38,16 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     log_file: str = "logs/bot.log"
     
-    @validator('news_rss_feeds', pre=True)
-    def parse_rss_feeds(cls, v):
-        """Parse comma-separated RSS feeds from environment variable."""
-        if isinstance(v, str):
-            return [feed.strip() for feed in v.split(',') if feed.strip()]
-        return v
+    def get_news_feeds_list(self) -> List[str]:
+        """Parse comma-separated RSS feeds from string."""
+        if isinstance(self.news_rss_feeds, str):
+            return [feed.strip() for feed in self.news_rss_feeds.split(',') if feed.strip()]
+        return [self.news_rss_feeds]
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": False
+    }
 
 # Global settings instance
 settings = Settings()
